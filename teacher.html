@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduFlow – Teacher Dashboard</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/dashboard.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page teacher-theme">
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <span class="brand-icon-sm">🎓</span>
+    <span>EduFlow</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#" class="nav-item active" data-section="dashboard"><span class="nav-icon">🏠</span><span>Dashboard</span></a>
+    <a href="#" class="nav-item" data-section="assignments"><span class="nav-icon">📝</span><span>Assignments</span></a>
+    <a href="#" class="nav-item" data-section="grading"><span class="nav-icon">🏆</span><span>Grade Work</span></a>
+    <a href="#" class="nav-item" data-section="timetable"><span class="nav-icon">🗓️</span><span>Timetable</span></a>
+    <a href="#" class="nav-item" data-section="students"><span class="nav-icon">👥</span><span>Students</span></a>
+    <a href="#" class="nav-item" data-section="chat"><span class="nav-icon">💬</span><span>Chat</span></a>
+    <a href="#" class="nav-item" data-section="events"><span class="nav-icon">🎉</span><span>Events</span></a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="avatar teacher-avatar">PR</div>
+      <div>
+        <div class="user-name">Prof. Rawal</div>
+        <div class="user-role">Teacher</div>
+      </div>
+    </div>
+    <a href="index.html" class="logout-btn">⬅ Logout</a>
+  </div>
+</aside>
+
+<div class="main-content">
+  <header class="topbar">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="topbar-title" id="pageTitle">Dashboard</div>
+    <div class="topbar-actions">
+      <button class="notif-btn">🔔 <span class="badge">2</span></button>
+    </div>
+  </header>
+
+  <!-- DASHBOARD -->
+  <section class="section active" id="section-dashboard">
+    <div class="section-header"><h2>Welcome, Prof. Rawal 👋</h2><p>Here's your teaching overview</p></div>
+    <div class="stats-row">
+      <div class="stat-card blue"><div class="stat-num">4</div><div class="stat-label">Subjects Teaching</div></div>
+      <div class="stat-card green"><div class="stat-num">120</div><div class="stat-label">Total Students</div></div>
+      <div class="stat-card orange"><div class="stat-num">8</div><div class="stat-label">Pending Grading</div></div>
+      <div class="stat-card purple"><div class="stat-num">3</div><div class="stat-label">Today's Classes</div></div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-header">📌 Upcoming Topics to Teach</div>
+        <div id="upcomingTopics"></div>
+      </div>
+      <div class="card">
+        <div class="card-header">🎉 Events & Holidays</div>
+        <div class="event-list" id="eventList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASSIGNMENTS -->
+  <section class="section" id="section-assignments">
+    <div class="section-header"><h2>Assignment Submissions</h2><p>Track student submissions</p></div>
+    <div class="card">
+      <div class="card-header">
+        Submission Control
+        <label class="toggle-label">
+          <span>Allow Submissions</span>
+          <input type="checkbox" id="allowSubmit" checked onchange="toggleSubmissions()"/>
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div id="teacherAssignments"></div>
+    </div>
+  </section>
+
+  <!-- GRADING -->
+  <section class="section" id="section-grading">
+    <div class="section-header"><h2>Grade Student Work</h2></div>
+    <div id="gradingWrap"></div>
+  </section>
+
+  <!-- TIMETABLE -->
+  <section class="section" id="section-timetable">
+    <div class="section-header"><h2>My Timetable</h2></div>
+    <div class="timetable-wrap" id="timetableWrap"></div>
+  </section>
+
+  <!-- STUDENTS -->
+  <section class="section" id="section-students">
+    <div class="section-header"><h2>Student Management</h2></div>
+    <div class="card">
+      <div class="card-header">Enrolled Students <input type="text" placeholder="Search..." class="inline-search" id="studentSearch" oninput="filterStudents()"/></div>
+      <table class="data-table" id="studentsTable">
+        <thead><tr><th>Name</th><th>Roll No</th><th>Course</th><th>Attendance</th><th>Action</th></tr></thead>
+        <tbody id="studentsBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CHAT -->
+  <section class="section" id="section-chat">
+    <div class="section-header"><h2>Chat with Students</h2></div>
+    <div class="chat-layout">
+      <div class="chat-sidebar">
+        <div class="chat-search"><input type="text" placeholder="Search students..."/></div>
+        <div class="chat-contacts" id="chatContacts"></div>
+      </div>
+      <div class="chat-main">
+        <div class="chat-header-bar" id="chatHeaderBar"><span>Select a student to chat</span></div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" placeholder="Type a message..."/>
+          <button onclick="sendMessage('teacher')">Send ➤</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS -->
+  <section class="section" id="section-events">
+    <div class="section-header"><h2>Events & Holidays</h2></div>
+    <div class="events-full" id="eventsFull"></div>
+  </section>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/teacher.js"></script>
+</body>
+</html>

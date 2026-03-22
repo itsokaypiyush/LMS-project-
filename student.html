@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduFlow – Student Dashboard</title>
+  <link rel="stylesheet" href="/style.css"/>
+  <link rel="stylesheet" href="/dashboard.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <span class="brand-icon-sm">🎓</span>
+    <span>EduFlow</span>
+  </div>
+  <nav class="sidebar-nav">
+    <a href="#" class="nav-item active" data-section="dashboard"><span class="nav-icon">🏠</span><span>Dashboard</span></a>
+    <a href="#" class="nav-item" data-section="courses"><span class="nav-icon">📚</span><span>My Courses</span></a>
+    <a href="#" class="nav-item" data-section="timetable"><span class="nav-icon">🗓️</span><span>Timetable</span></a>
+    <a href="#" class="nav-item" data-section="assignments"><span class="nav-icon">📝</span><span>Assignments</span></a>
+    <a href="#" class="nav-item" data-section="attendance"><span class="nav-icon">✅</span><span>Attendance</span></a>
+    <a href="#" class="nav-item" data-section="grades"><span class="nav-icon">🏆</span><span>Grades</span></a>
+    <a href="#" class="nav-item" data-section="doubts"><span class="nav-icon">❓</span><span>Doubts</span></a>
+    <a href="#" class="nav-item" data-section="chat"><span class="nav-icon">💬</span><span>Chat</span></a>
+    <a href="#" class="nav-item" data-section="events"><span class="nav-icon">🎉</span><span>Events</span></a>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="user-info">
+      <div class="avatar">AS</div>
+      <div>
+        <div class="user-name">Aryan Shah</div>
+        <div class="user-role">Student</div>
+      </div>
+    </div>
+    <a href="index.html" class="logout-btn">⬅ Logout</a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+  <header class="topbar">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="topbar-title" id="pageTitle">Dashboard</div>
+    <div class="topbar-actions">
+      <button class="notif-btn">🔔 <span class="badge">3</span></button>
+    </div>
+  </header>
+
+  <!-- DASHBOARD SECTION -->
+  <section class="section active" id="section-dashboard">
+    <div class="section-header">
+      <h2>Good morning, Aryan 👋</h2>
+      <p>Here's what's happening today</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card blue"><div class="stat-num">6</div><div class="stat-label">Enrolled Courses</div></div>
+      <div class="stat-card green"><div class="stat-num">3</div><div class="stat-label">Pending Assignments</div></div>
+      <div class="stat-card orange"><div class="stat-num">87%</div><div class="stat-label">Attendance</div></div>
+      <div class="stat-card purple"><div class="stat-num">A-</div><div class="stat-label">Average Grade</div></div>
+    </div>
+
+    <div class="two-col">
+      <!-- Calendar -->
+      <div class="card">
+        <div class="card-header">📅 Upcoming Assignments</div>
+        <div class="calendar" id="studentCalendar"></div>
+        <div class="assignment-list" id="upcomingAssignments"></div>
+      </div>
+      <!-- Events -->
+      <div class="card">
+        <div class="card-header">🎉 Events & Holidays</div>
+        <div class="event-list" id="eventList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES SECTION -->
+  <section class="section" id="section-courses">
+    <div class="section-header"><h2>My Courses</h2><p>All enrolled subjects this semester</p></div>
+    <div class="courses-grid" id="coursesGrid"></div>
+  </section>
+
+  <!-- TIMETABLE SECTION -->
+  <section class="section" id="section-timetable">
+    <div class="section-header"><h2>My Timetable</h2><p>Weekly class schedule</p></div>
+    <div class="timetable-wrap" id="timetableWrap"></div>
+  </section>
+
+  <!-- ASSIGNMENTS SECTION -->
+  <section class="section" id="section-assignments">
+    <div class="section-header"><h2>Assignments</h2><p>Submit and track your assignments</p></div>
+    <div class="assignments-wrap" id="assignmentsWrap"></div>
+  </section>
+
+  <!-- ATTENDANCE SECTION -->
+  <section class="section" id="section-attendance">
+    <div class="section-header"><h2>Attendance</h2><p>Your attendance per subject</p></div>
+    <div class="attendance-wrap" id="attendanceWrap"></div>
+  </section>
+
+  <!-- GRADES SECTION -->
+  <section class="section" id="section-grades">
+    <div class="section-header"><h2>Grades</h2><p>Exam results and performance</p></div>
+    <div class="grades-wrap" id="gradesWrap"></div>
+  </section>
+
+  <!-- DOUBTS SECTION -->
+  <section class="section" id="section-doubts">
+    <div class="section-header"><h2>Post a Doubt</h2><p>Ask your teachers directly</p></div>
+    <div class="doubts-wrap">
+      <div class="card doubt-form-card">
+        <div class="form-group"><label>Subject</label>
+          <select><option>Operating Systems</option><option>Computer Networks</option><option>DBMS</option><option>Algorithms</option></select>
+        </div>
+        <div class="form-group"><label>Your Doubt</label>
+          <textarea rows="4" placeholder="Describe your doubt in detail..."></textarea>
+        </div>
+        <button class="btn-primary" onclick="submitDoubt()">Post Doubt</button>
+      </div>
+      <div class="card" id="doubtList"><div class="card-header">📋 Previous Doubts</div></div>
+    </div>
+  </section>
+
+  <!-- CHAT SECTION -->
+  <section class="section" id="section-chat">
+    <div class="section-header"><h2>Chat with Teacher</h2></div>
+    <div class="chat-layout">
+      <div class="chat-sidebar">
+        <div class="chat-search"><input type="text" placeholder="Search teachers..."/></div>
+        <div class="chat-contacts" id="chatContacts"></div>
+      </div>
+      <div class="chat-main">
+        <div class="chat-header-bar" id="chatHeaderBar"><span>Select a teacher to chat</span></div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" placeholder="Type a message..."/>
+          <button onclick="sendMessage('student')">Send ➤</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENTS SECTION -->
+  <section class="section" id="section-events">
+    <div class="section-header"><h2>Events & Holidays</h2><p>Upcoming college events</p></div>
+    <div class="events-full" id="eventsFull"></div>
+  </section>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/student.js"></script>
+</body>
+</html>
